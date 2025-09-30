@@ -7,6 +7,7 @@ import dash_bootstrap_components as dbc
 
 # --- STYLING & SETUP ---
 app = Dash(__name__, external_stylesheets=[dbc.themes.BOOTSTRAP, 'https://fonts.googleapis.com/css2?family=Lato:wght@400;700&display=swap'])
+server = app.server
 app.title = "Foodpanda Market Basket Dashboard"
 
 colors = {
@@ -104,7 +105,8 @@ def format_change_indicator(current_val, prev_val):
     elif current_val > 0: return "▲ (New)", colors['success']
     else: return "—", colors['text']
 
-@app.callback(Output('kpi-cards', 'children'), [Input('filter-date', 'start_date'), Input('filter-date', 'end_date'), Input('filter-city', 'value')])
+@app.callback(Output('kpi-cards', 'children'), [Input('filter-date', 'start_date'), 
+Input('filter-date', 'end_date'), Input('filter-city', 'value')])
 def update_kpi_cards(start_date, end_date, selected_cities):
     start_dt, end_dt = pd.to_datetime(start_date), pd.to_datetime(end_date)
     duration = end_dt - start_dt
