@@ -14,10 +14,13 @@ colors = {
     'background': '#f8f9fa', 'text': '#495057', 'primary': '#E32D3A', 'card_bg': '#FFFFFF',
     'accent': '#007bff', 'success': '#28a745', 'danger': '#dc3545'
 }
+import os
+
+file_path = os.path.join(os.path.dirname(__file__), '..', 'data', 'Foodpanda Analysis Dataset.csv')
+file_path = os.path.abspath(file_path)
 
 # --- DATA LOADING & CLEANING ---
 try:
-    file_path = '/home/prathmk85/Foodpanda_MarketBasket_Project/data/Foodpanda Analysis Dataset.csv'
     df_raw = pd.read_csv(file_path)
     city_mapping = {'Peshawar': 'Pune', 'Multan': 'Mumbai', 'Lahore': 'Lucknow', 'Karachi': 'Kochi', 'Islamabad': 'Indore'}
     df_raw['city'] = df_raw['city'].replace(city_mapping)
